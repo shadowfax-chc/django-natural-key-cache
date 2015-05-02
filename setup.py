@@ -1,24 +1,35 @@
 #!/usr/bin/env python
 # vim: set et ts=4 sw=4 fileencoding=utf-8:
-
+'''
+setup script for natural_key_cache
+'''
+import os
 from setuptools import setup, find_packages
 
-requirements = [
-    'Django>=1.7',
-]
+SETUP_DIRNAME = os.path.dirname(__file__)
+if SETUP_DIRNAME != '':
+    os.chdir(SETUP_DIRNAME)
+
+REQS_FILE = os.path.join(os.path.abspath(SETUP_DIRNAME), 'requirements.txt')
+REQUIREMENTS = []
+with open(REQS_FILE) as rfh:
+    for line in rfh.readlines():
+        if not line or line.startswith('#'):
+            continue
+        REQUIREMENTS.append(line.strip())
 
 setup(
     name='django-natural-key-cache',
     version='0.1',
+    license='ISC License',
     description='Cache manager for caching django models by natural keys',
     long_description='Cache manager for caching django models by natural keys',
     author='Timothy Messier',
     author_email='tim.messier@gmail.com',
     url='https://github.com/shadowfax-chc/django-natural-key-cache',
     packages=find_packages(exclude=('tests', 'doc')),
-    package_dir={'natural_key_cache': 'natural_key_cache'},
     include_package_data=True,
-    install_requires=requirements,
+    install_requires=REQUIREMENTS,
     zip_safe=False,
     keywords='django-natural-key-cache',
     classifiers=[
