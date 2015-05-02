@@ -11,6 +11,9 @@ from .factories import AuthorFactory, BookFactory
 
 
 class NaturalKeyCacheManagerTests(TestCase):
+    '''
+    Test using models with NaturalKeyCacheManager
+    '''
     def setUp(self):
         cache.clear()
         self.author = AuthorFactory.create()
@@ -18,12 +21,18 @@ class NaturalKeyCacheManagerTests(TestCase):
         self.book = BookFactory.create(author=self.author, isbn=self.isbn)
 
     def test_lookup(self):
+        '''
+        Test looking up an object with a pk natural key.
+        '''
         with self.assertNumQueries(0):
             author = Author.cache.get(pk=self.author.pk)
         self.assertEqual(author.pk, self.author.pk)
         self.assertEqual(author.name, self.author.name)
 
     def test_related(self):
+        '''
+        Test accessing a foriegn keyed object after retrive from cache.
+        '''
         with self.assertNumQueries(0):
             book = Book.cache.get(isbn=self.isbn)
         self.assertEqual(book.isbn, self.book.isbn)
@@ -33,6 +42,9 @@ class NaturalKeyCacheManagerTests(TestCase):
         self.assertEqual(author.name, self.author.name)
 
     def test_doesnotexist(self):
+        '''
+        Test that DoesNotExist gets cached.
+        '''
         # First attempt should cause cache miss
         with self.assertNumQueries(1):
             with self.assertRaises(Book.DoesNotExist):

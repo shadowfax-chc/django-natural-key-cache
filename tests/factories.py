@@ -10,14 +10,17 @@ from tests.models import Author, Book
 
 
 class AuthorFactory(factory.django.DjangoModelFactory):
+    ''' Create Authors for tests '''
     class Meta:
+        ''' Meta '''
         model = Author
-
     name = fuzzy.FuzzyText()
 
 
 class BookFactory(factory.django.DjangoModelFactory):
+    ''' Create Books for tests '''
     class Meta:
+        ''' Meta '''
         model = Book
     title = fuzzy.FuzzyText()
     isbn = fuzzy.FuzzyText(length=13)

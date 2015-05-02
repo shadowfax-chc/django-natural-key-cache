@@ -9,12 +9,20 @@ from natural_key_cache.cache_manager import NaturalKeyCacheManager
 
 
 class Author(models.Model):
+    '''
+    Test model with only pk/id as natural key
+    '''
     cache = NaturalKeyCacheManager()
 
     name = models.CharField(max_length=128)
 
 
 class Book(models.Model):
+    '''
+    Test model with one fields as natural key.
+
+    Also has a foreign key to another model.
+    '''
     natural_keys = (
         'isbn',
     )

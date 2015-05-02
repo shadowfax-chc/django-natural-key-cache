@@ -1,6 +1,8 @@
 # vim: set et ts=4 sw=4 fileencoding=utf-8:
+'''
+Django settings for test project
+'''
 import os
-import sys
 
 PROJ_ROOT = os.path.dirname(__file__)
 
@@ -43,12 +45,8 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'formatters': {
-        'verbose': {
-            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt': "%d/%b/%Y %H:%M:%S",
-        },
         'simple': {
-            'format': ' [%(levelname)s] %(name)s: process_id="%(process)s";thread_id="%(thread)s": %(message)s',
+            'format': "%(levelname)s [%(name)s:%(lineno)s] %(message)s",
         },
     },
     'handlers': {
