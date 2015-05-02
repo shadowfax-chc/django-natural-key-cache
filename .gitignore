@@ -1,0 +1,6 @@
+*.py[co]
+.tox
+.pyenv
+*.sw[po]
+*.~
+*.orig
