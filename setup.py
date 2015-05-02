@@ -24,12 +24,14 @@ class CleanCommand(Command):
     user_options = []
 
     def initialize_options(self):
+        ''' no options '''
         pass
 
     def finalize_options(self):
-        pass
+        ''' no options '''
 
     def run(self):
+        ''' clean things up '''
         os.chdir(SETUP_DIRNAME)
         os.system('rm -rf ./build ./dist *.egg-info')
 
