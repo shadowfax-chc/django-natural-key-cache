@@ -4,3 +4,6 @@
 *.sw[po]
 *.~
 *.orig
+dist
+*egg-info
+build
