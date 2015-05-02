@@ -4,7 +4,7 @@
 setup script for natural_key_cache
 '''
 import os
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Command
 
 SETUP_DIRNAME = os.path.dirname(__file__)
 if SETUP_DIRNAME != '':
@@ -17,6 +17,22 @@ with open(REQS_FILE) as rfh:
         if not line or line.startswith('#'):
             continue
         REQUIREMENTS.append(line.strip())
+
+class CleanCommand(Command):
+    ''' Clean command '''
+    description = 'Clean dist/build directories'
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        os.chdir(SETUP_DIRNAME)
+        os.system('rm -rf ./build ./dist *.egg-info')
+
 
 setup(
     name='django-natural-key-cache',
@@ -32,6 +48,9 @@ setup(
     install_requires=REQUIREMENTS,
     zip_safe=False,
     keywords='django-natural-key-cache',
+    cmdclass={
+        'clean': CleanCommand,
+    },
     classifiers=[
         'Development Status :: 1 - Planning',
         'Intended Audience :: Developers',
