@@ -31,8 +31,10 @@ class NaturalKeyCacheManager(object):
         self.cache_backend = caches[backend]
         self.timeout = timeout
 
-
     def generate_key(self, **search_params):
+        '''
+        Build the cache key
+        '''
         key_parts = ''.join(
             [u'{0}{1}'.format(k, v) for k, v in search_params.items()]
         )
@@ -43,6 +45,12 @@ class NaturalKeyCacheManager(object):
         return hashlib.md5(full_key.encode('utf-8')).hexdigest()
 
     def get(self, **kwargs):
+        '''
+        Get the object.
+
+        Attempt to get the object from cache based on the natural keys.
+        if not in cache, retrieve from database and cache the result.
+        '''
         search_params = {}
         for key in self.natural_keys:
             search_params[key] = kwargs[key]
@@ -54,6 +62,7 @@ class NaturalKeyCacheManager(object):
                          cache_key)
             try:
                 obj = self.model._default_manager.get(**search_params)
+                self.cache_backend.set(cache_key, obj)
             except self.model.DoesNotExist:
                 self.cache_backend.set(cache_key, self.DNE)
                 raise
@@ -62,12 +71,18 @@ class NaturalKeyCacheManager(object):
         return obj
 
     def contribute_to_class(self, model, name):
-        self.model = model
+        '''
+        Settings applied to the model when using this manager
+        '''
+        self.model = model  # pylint: disable=W0201
         setattr(model, name, ManagerDescriptor(self))
         models.signals.post_save.connect(self.post_save, sender=model)
         models.signals.post_delete.connect(self.post_delete, sender=model)
 
-    def post_save(self, instance, **kwargs):
+    def post_save(self, instance, **kwargs):  # pylint: disable=W0613
+        '''
+        Update cache on post save
+        '''
         search_params = {}
         for key in self.natural_keys:
             search_params[key] = getattr(instance, key)
@@ -77,7 +92,10 @@ class NaturalKeyCacheManager(object):
                      key)
         self.cache_backend.set(key, instance, self.timeout)
 
-    def post_delete(self, instance, **kwargs):
+    def post_delete(self, instance, **kwargs):  # pylint: disable=W0613
+        '''
+        Update cache on post delete
+        '''
         search_params = {}
         for key in self.natural_keys:
             search_params[key] = getattr(instance, key)
