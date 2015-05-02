@@ -6,9 +6,6 @@ from setuptools import setup, find_packages
 requirements = [
     'Django>=1.7',
 ]
-test_requirements = [
-    'nose>=1.3,<2',
-]
 
 setup(
     name='django-natural-key-cache',
@@ -31,6 +28,4 @@ setup(
         "Programming Language :: Python :: 2",
         'Programming Language :: Python :: 2.7',
     ],
-    test_suite='nose.collector',
-    tests_require=test_requirements,
 )

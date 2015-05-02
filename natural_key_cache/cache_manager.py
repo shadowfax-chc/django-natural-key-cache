@@ -22,7 +22,7 @@ class NaturalKeyCacheManager(object):
     def __init__(self,
                  natural_keys=None,
                  backend='default',
-                 timeout=0):
+                 timeout=None):
         if not natural_keys:
             natural_keys = [
                 'pk',
@@ -49,10 +49,14 @@ class NaturalKeyCacheManager(object):
         cache_key = self.generate_key(**search_params)
         obj = self.cache_backend.get(cache_key)
         if obj is None:
+            logger.debug('cache miss %s: %s',
+                         self.model._meta.db_table,
+                         cache_key)
             try:
                 obj = self.model._default_manager.get(**search_params)
             except self.model.DoesNotExist:
                 self.cache_backend.set(cache_key, self.DNE)
+                raise
         elif obj == self.DNE:
             raise self.model.DoesNotExist()
         return obj
@@ -68,6 +72,9 @@ class NaturalKeyCacheManager(object):
         for key in self.natural_keys:
             search_params[key] = getattr(instance, key)
         key = self.generate_key(**search_params)
+        logger.debug('model %s saved: updating cache: %s',
+                     instance._meta.db_table,
+                     key)
         self.cache_backend.set(key, instance, self.timeout)
 
     def post_delete(self, instance, **kwargs):
@@ -75,4 +82,7 @@ class NaturalKeyCacheManager(object):
         for key in self.natural_keys:
             search_params[key] = getattr(instance, key)
         key = self.generate_key(**search_params)
+        logger.debug('model %s deleted: updating cache: %s',
+                     instance._meta.db_table,
+                     key)
         self.cache_backend.set(key, self.DNE, self.timeout)
