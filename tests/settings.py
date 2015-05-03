@@ -15,7 +15,6 @@ DATABASES = {
 }
 
 INSTALLED_APPS = (
-    'natural_key_cache',
     'tests',
 )
 
