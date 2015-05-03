@@ -97,3 +97,13 @@ class NaturalKeyCacheManagerTests(TestCase):
         with self.assertNumQueries(0):
             with self.assertRaises(Book.DoesNotExist):
                 Book.cache.get(isbn='missing')
+
+    def test_delete(self):
+        '''
+        Test that deleting an object updates the cache.
+        '''
+        old_pk = self.author.pk
+        self.author.delete()
+        with self.assertNumQueries(0):
+            with self.assertRaises(Author.DoesNotExist):
+                Author.cache.get(pk=old_pk)
