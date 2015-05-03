@@ -8,5 +8,4 @@ dist
 *egg-info
 build
 _build
-doc/ref
 .coverage
