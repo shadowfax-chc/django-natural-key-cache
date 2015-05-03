@@ -17,6 +17,26 @@ class Author(models.Model):
     name = models.CharField(max_length=128)
 
 
+class Shelf(models.Model):
+    '''
+    Test model with two fields as natural keys.
+    '''
+    natural_keys = (
+        'number',
+        'room',
+    )
+    cache = NaturalKeyCacheManager(natural_keys)
+    number = models.IntegerField()
+    room = models.CharField(max_length=4)
+
+    class Meta:  # pylint: disable=old-style-class,no-init
+        ''' Meta '''
+        unique_together = (
+            'number',
+            'room',
+        )
+
+
 class Book(models.Model):
     '''
     Test model with one fields as natural key.
@@ -30,3 +50,4 @@ class Book(models.Model):
     title = models.CharField(max_length=128)
     isbn = models.CharField(max_length=13, unique=True)
     author = models.ForeignKey(Author)
+    shelf = models.ForeignKey(Shelf)

@@ -64,7 +64,7 @@ LOGGING = {
         'django': {
             'handlers': ['console'],
             'propagate': False,
-            'level': 'DEBUG',
+            'level': 'ERROR',
         },
         'factory': {
             'handlers': ['console'],
@@ -74,7 +74,7 @@ LOGGING = {
         'natural_key_cache': {
             'handlers': ['console'],
             'propagate': False,
-            'level': 'DEBUG',
+            'level': 'ERROR',
         },
     },
 }
