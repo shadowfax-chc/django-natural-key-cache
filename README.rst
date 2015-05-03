@@ -1,7 +1,7 @@
 Django Natural Key Cache
 ========================
 
-|build-status|
+|build-status| |coverage|
 
 Cache models via natural keys.
 
@@ -9,6 +9,11 @@ Cache models via natural keys.
     :alt: Build Status
     :scale: 100%
     :target: https://travis-ci.org/shadowfax-chc/django-natural-key-cache
+
+.. |coverage| image:: http://img.shields.io/coveralls/shadowfax-chc/django-natural-key-cache.svg?style=flat
+    :alt: Coverage Status
+    :scale: 100%
+    :target: https://coveralls.io/r/shadowfax-chc/django-natural-key-cache?branch=master
 
 
 Quick Start
