@@ -15,10 +15,10 @@ Cache models via natural keys.
     :scale: 100%
     :target: https://coveralls.io/r/shadowfax-chc/django-natural-key-cache?branch=master
 
-.. |docs| image:: https://readthedocs.org/projects/django-natural-key-cache/badge/?version=latest
+.. |docs| image:: https://readthedocs.org/projects/django-natural-key-cache/badge/
     :alt: Documentation Status
     :scale: 100%
-    :target: https://readthedocs.org/projects/django-natural-key-cache/?badge=latest
+    :target: http://django-natural-key-cache.readthedocs.org/en/latest/
 
 
 Quick Start
