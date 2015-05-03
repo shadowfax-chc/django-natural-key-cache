@@ -18,6 +18,32 @@ with open(REQS_FILE) as rfh:
             continue
         REQUIREMENTS.append(line.strip())
 
+
+class TestCommand(Command):
+    '''
+    Custom Test command.
+
+    Runs test suite for test django project
+    '''
+    user_options = []
+
+    def initialize_options(self):
+        ''' no options '''
+        pass
+
+    def finalize_options(self):
+        ''' no options '''
+        pass
+
+    def run(self):
+        ''' Run django project test suite '''
+        import sys, subprocess
+        raise SystemExit(
+            subprocess.call([sys.executable,
+                             'tests/manage.py',
+                             'test']))
+
+
 class CleanCommand(Command):
     ''' Clean command '''
     description = 'Clean dist/build directories'
@@ -51,6 +77,7 @@ setup(
     zip_safe=False,
     keywords='django-natural-key-cache',
     cmdclass={
+        'test': TestCommand,
         'clean': CleanCommand,
     },
     classifiers=[

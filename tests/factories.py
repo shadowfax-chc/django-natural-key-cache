@@ -11,7 +11,7 @@ from tests.models import Author, Book
 
 class AuthorFactory(factory.django.DjangoModelFactory):
     ''' Create Authors for tests '''
-    class Meta:
+    class Meta:  # pylint: disable=old-style-class,no-init
         ''' Meta '''
         model = Author
     name = fuzzy.FuzzyText()
@@ -19,7 +19,7 @@ class AuthorFactory(factory.django.DjangoModelFactory):
 
 class BookFactory(factory.django.DjangoModelFactory):
     ''' Create Books for tests '''
-    class Meta:
+    class Meta:  # pylint: disable=old-style-class,no-init
         ''' Meta '''
         model = Book
     title = fuzzy.FuzzyText()

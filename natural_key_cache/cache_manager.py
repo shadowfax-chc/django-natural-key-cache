@@ -74,12 +74,14 @@ class NaturalKeyCacheManager(object):
         '''
         Settings applied to the model when using this manager
         '''
-        self.model = model  # pylint: disable=W0201
+        self.model = model  # pylint: disable=attribute-defined-outside-init
         setattr(model, name, ManagerDescriptor(self))
         models.signals.post_save.connect(self.post_save, sender=model)
         models.signals.post_delete.connect(self.post_delete, sender=model)
 
-    def post_save(self, instance, **kwargs):  # pylint: disable=W0613
+    def post_save(self,
+                  instance,
+                  **kwargs):  # pylint: disable=unused-argument
         '''
         Update cache on post save
         '''
@@ -92,7 +94,9 @@ class NaturalKeyCacheManager(object):
                      key)
         self.cache_backend.set(key, instance, self.timeout)
 
-    def post_delete(self, instance, **kwargs):  # pylint: disable=W0613
+    def post_delete(self,
+                    instance,
+                    **kwargs):  # pylint: disable=unused-argument
         '''
         Update cache on post delete
         '''

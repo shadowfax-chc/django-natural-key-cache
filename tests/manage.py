@@ -6,7 +6,7 @@ Manage for test django project
 import os
 import sys
 try:
-    from . import settings  # pylint: disable=unused-import
+    import settings  # pylint: disable=unused-import,relative-import
 except ImportError:
     sys.stderr.write("Error importing settings")
     sys.exit(1)
