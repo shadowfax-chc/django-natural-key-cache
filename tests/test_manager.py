@@ -61,6 +61,21 @@ class NaturalKeyCacheManagerTests(TestCase):
         self.assertEqual(shelf.room, self.shelf.room)
         self.assertEqual(shelf.pk, self.shelf.pk)
 
+    def test_update(self):
+        '''
+        Test that the cache is updated when the model is updated.
+        '''
+        with self.assertNumQueries(0):
+            author = Author.cache.get(pk=self.author.pk)
+        self.assertEqual(author.pk, self.author.pk)
+        self.assertEqual(author.name, self.author.name)
+        self.author = Author.objects.get(pk=self.author.pk)
+        self.author.name = 'new name'
+        self.author.save()
+        with self.assertNumQueries(0):
+            author = Author.cache.get(pk=self.author.pk)
+        self.assertEqual(author.name, 'new name')
+
     def test_cache_miss(self):
         '''
         Test after a cache miss that the object gets cached.
