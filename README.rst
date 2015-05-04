@@ -15,7 +15,7 @@ Cache models via natural keys.
     :scale: 100%
     :target: https://coveralls.io/r/shadowfax-chc/django-natural-key-cache?branch=master
 
-.. |deps| image:: http://img.shields.io/gemnasium/shadowfax-chc/django-natural-key-cache?style=flat
+.. |deps| image:: http://img.shields.io/gemnasium/shadowfax-chc/django-natural-key-cache.svg?style=flat
     :alt: Dependency Status
     :scale: 100%
     :target: https://gemnasium.com/shadowfax-chc/django-natural-key-cache
