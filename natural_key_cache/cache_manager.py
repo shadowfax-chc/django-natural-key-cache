@@ -33,7 +33,10 @@ class NaturalKeyCacheManager(object):
                 'pk',
             ]
         self.natural_keys = natural_keys
-        self.cache_backend = caches[backend]
+        if django.VERSION[:2] >= (1, 7):
+            self.cache_backend = caches[backend]
+        else:
+            self.cache_backend = caches(backend)
         self.timeout = timeout
 
     def generate_key(self, **search_params):
