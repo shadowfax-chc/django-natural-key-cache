@@ -4,8 +4,13 @@ natural_key_cache.cache_manager
 ===============================
 '''
 import hashlib
+import django
 
-from django.core.cache import caches
+if django.VERSION[:2] >= (1, 7):
+    from django.core.cache import caches
+else:
+    from django.core.cache import get_cache as caches
+
 from django.db import models
 from django.db.models.manager import ManagerDescriptor
 
