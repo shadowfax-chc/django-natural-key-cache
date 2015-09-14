@@ -66,7 +66,7 @@ class CleanCommand(Command):
 
 setup(
     name='django-natural-key-cache',
-    version='0.1',
+    version='0.2',
     license='ISC License',
     description='Cache manager for caching django models by natural keys',
     long_description='Cache manager for caching django models by natural keys',
