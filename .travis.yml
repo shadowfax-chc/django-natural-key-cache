@@ -10,3 +10,13 @@ install:
 script:
   - tox -e $TOX_ENV
 after_success: coveralls
+
+deploy:
+  provider: pypi
+  user: tim.messier
+  password:
+    secure: YDKe4d9BJEcH9Fm3328nTMTD1/oUDQfdlK6k53U2hloDFT8cA/YEqS2RjHAzgewjJnMNmCYMwVh/s0NFl/Ou2V/MAVS9zHXe1hyVO+TVnkDzHMB/I11Pf+7gexO1xbA6fevB+CzH/Ynx5VB9kyaQG5WP7IO7PcEKe47+ZPPULgU=
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    branch: master
