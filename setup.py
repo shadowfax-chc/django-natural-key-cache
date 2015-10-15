@@ -39,11 +39,14 @@ class TestCommand(Command):
         ''' Run django project test suite '''
         import sys, subprocess
         raise SystemExit(
-            subprocess.call(['coverage',
-                             'run',
-                             '--source=natural_key_cache',
-                             'tests/manage.py',
-                             'test']))
+            subprocess.call([
+                'coverage',
+                'run',
+                '--source=natural_key_cache',
+                'tests/manage.py',
+                'test',
+                '--verbosity=2',
+            ]))
 
 
 class CleanCommand(Command):
