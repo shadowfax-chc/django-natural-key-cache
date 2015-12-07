@@ -4,8 +4,6 @@ services:
   - memcached
 env:
   - TOX_ENV=py27
-  - TOX_ENV=dj16
-  - TOX_ENV=dj17
   - TOX_ENV=dj18
   - TOX_ENV=dj19
 install:
