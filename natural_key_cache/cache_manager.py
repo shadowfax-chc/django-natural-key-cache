@@ -3,18 +3,14 @@
 natural_key_cache.cache_manager
 ===============================
 '''
+import logging
 import hashlib
+
 import django
-
-if django.VERSION[:2] >= (1, 7):
-    from django.core.cache import caches
-else:
-    from django.core.cache import get_cache as caches
-
+from django.core.cache import caches
 from django.db import models
 from django.db.models.manager import ManagerDescriptor
 
-import logging
 logger = logging.getLogger(__name__)
 
 
@@ -33,10 +29,7 @@ class NaturalKeyCacheManager(object):
                 'pk',
             ]
         self.natural_keys = natural_keys
-        if django.VERSION[:2] >= (1, 7):
-            self.cache_backend = caches[backend]
-        else:
-            self.cache_backend = caches(backend)
+        self.cache_backend = caches[backend]
         self.timeout = timeout
 
     def generate_key(self, **search_params):
