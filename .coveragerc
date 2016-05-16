@@ -1,0 +1,12 @@
+[run]
+branch = 1
+
+[report]
+show_missing = 1
+omit =
+    .pyenv/*
+    .tox/*
+    */test/*
+    */tests/*
+exclude_lines =
+    pragma: no cover

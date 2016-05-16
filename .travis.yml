@@ -7,10 +7,12 @@ env:
   - TOX_ENV=dj18
   - TOX_ENV=dj19
 install:
-  - pip install tox coveralls
+  - pip install tox coveralls codecov
 script:
   - tox -e $TOX_ENV
-after_success: coveralls
+after_success:
+  - coveralls
+  - codecov
 
 deploy:
   provider: pypi
