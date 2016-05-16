@@ -1,7 +1,7 @@
 Django Natural Key Cache
 ========================
 
-|build-status| |coverage| |deps| |docs| |pypi|
+|build-status| |coverage| |codecov| |deps| |docs| |pypi|
 
 Cache models via natural keys.
 
@@ -11,9 +11,14 @@ Cache models via natural keys.
     :target: https://travis-ci.org/shadowfax-chc/django-natural-key-cache
 
 .. |coverage| image:: http://img.shields.io/coveralls/shadowfax-chc/django-natural-key-cache.svg?style=flat
-    :alt: Coverage Status
+    :alt: Coveralls Status
     :scale: 100%
     :target: https://coveralls.io/r/shadowfax-chc/django-natural-key-cache?branch=master
+
+.. |codecov| image:: https://img.shields.io/codecov/c/github/shadowfax-chc/django-natural-key-cache/master.svg
+    :alt: Codecov Status
+    :scale: 100%
+    :target: https://codecov.io/gh/shadowfax-chc/django-natural-key-cache
 
 .. |deps| image:: http://img.shields.io/gemnasium/shadowfax-chc/django-natural-key-cache.svg?style=flat
     :alt: Dependency Status
