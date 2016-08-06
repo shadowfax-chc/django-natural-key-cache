@@ -5,8 +5,10 @@ services:
 env:
   - TOX_ENV=py27-dj18
   - TOX_ENV=py27-dj19
+  - TOX_ENV=py27-dj110
   - TOX_ENV=py34-dj18
   - TOX_ENV=py34-dj19
+  - TOX_ENV=py34-dj110
 install:
   - pip install tox coveralls codecov
 script:
@@ -14,6 +16,11 @@ script:
 after_success:
   - coveralls
   - codecov
+
+matrix:
+  allow_failures:
+    - env: TOX_ENV=py27-dj110
+    - env: TOX_ENV=py34-dj110
 
 deploy:
   provider: pypi

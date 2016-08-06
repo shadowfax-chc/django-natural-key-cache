@@ -13,7 +13,7 @@ except ImportError:
 
 # add the parent directory to sys.path so that the test module has
 # natural_key_cache in it's python path
-TESTDIR = os.path.dirname(__file__)
+TESTDIR = os.path.abspath(os.path.dirname(__file__))
 MODULEDIR = os.path.dirname(TESTDIR)
 sys.path.insert(0, MODULEDIR)
 

@@ -12,6 +12,7 @@ class Author(models.Model):
     '''
     Test model with only pk/id as natural key
     '''
+    objects = models.Manager()
     cache = NaturalKeyCacheManager()
 
     name = models.CharField(max_length=128)
@@ -21,6 +22,7 @@ class Shelf(models.Model):
     '''
     Test model with two fields as natural keys.
     '''
+    objects = models.Manager()
     natural_keys = (
         'number',
         'room',
@@ -43,6 +45,7 @@ class Book(models.Model):
 
     Also has a foreign key to another model.
     '''
+    objects = models.Manager()
     natural_keys = (
         'isbn',
     )

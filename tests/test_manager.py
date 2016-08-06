@@ -6,8 +6,8 @@ tests.test_manager
 from django.test import TestCase
 from django.core.cache import cache
 
-from .models import Author, Book, Shelf
-from .factories import AuthorFactory, BookFactory, ShelfFactory
+from test_app.models import Author, Book, Shelf
+from test_app.factories import AuthorFactory, BookFactory, ShelfFactory
 
 
 class NaturalKeyCacheManagerTests(TestCase):

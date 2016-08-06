@@ -15,7 +15,7 @@ DATABASES = {
 }
 
 INSTALLED_APPS = (
-    'tests',
+    'test_app',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
