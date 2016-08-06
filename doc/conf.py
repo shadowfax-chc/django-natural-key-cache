@@ -1,31 +1,6 @@
 # vim: set et ts=4 sw=4 fileencoding=utf-8:
 import sys
 import os
-from mock import MagicMock
-
-class Mock(MagicMock):
-    '''
-    Mock out specified imports
-
-    This allows autodoc to do it's thing without having oodles of req'd
-    installed libs. This doesn't work with ``import *`` imports.
-
-    http://read-the-docs.readthedocs.org/en/latest/faq.html#i-get-import-errors-on-libraries-that-depend-on-c-modules
-    '''
-    @classmethod
-    def __getattr__(self, name):
-        return Mock()
-
-MOCK_MODULES = [
-    'django',
-    'django.db',
-    'django.db.models',
-    'django.db.models.manager',
-    'django.core',
-    'django.core.cache',
-]
-sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
