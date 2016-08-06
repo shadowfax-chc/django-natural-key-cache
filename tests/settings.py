@@ -3,6 +3,8 @@
 Django settings for test project
 '''
 import os
+import dj_config_url
+from getenv import env
 
 PROJ_ROOT = os.path.dirname(__file__)
 
@@ -20,14 +22,14 @@ INSTALLED_APPS = (
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
+CACHE_URI = env('TEST_CACHE_URI', 'memcache://127.0.0.1:11211')
+CUSTOM_CACHE_BACKEND = env('TEST_CACHE_BACKEND')
+
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': [
-            '127.0.0.1:11211',
-        ]
-    },
+    'default': dj_config_url.parse(CACHE_URI)
 }
+if CUSTOM_CACHE_BACKEND:
+    CACHES['default']['BACKEND'] = CUSTOM_CACHE_BACKEND
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
