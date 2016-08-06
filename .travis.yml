@@ -2,13 +2,20 @@ language: python
 python: 2.7
 services:
   - memcached
+  - redis-server
 env:
-  - TOX_ENV=py27-dj18
-  - TOX_ENV=py27-dj19
-  - TOX_ENV=py27-dj110
-  - TOX_ENV=py34-dj18
-  - TOX_ENV=py34-dj19
-  - TOX_ENV=py34-dj110
+  - TOX_ENV=py27-dj18-memcache
+  - TOX_ENV=py27-dj19-memcache
+  - TOX_ENV=py27-dj110-memcache
+  - TOX_ENV=py34-dj18-memcache
+  - TOX_ENV=py34-dj19-memcache
+  - TOX_ENV=py34-dj110-memcache
+  - TOX_ENV=py27-dj18-redis
+  - TOX_ENV=py27-dj19-redis
+  - TOX_ENV=py27-dj110-redis
+  - TOX_ENV=py34-dj18-redis
+  - TOX_ENV=py34-dj19-redis
+  - TOX_ENV=py34-dj110-redis
 install:
   - pip install tox coveralls codecov
 script:
@@ -19,8 +26,10 @@ after_success:
 
 matrix:
   allow_failures:
-    - env: TOX_ENV=py27-dj110
-    - env: TOX_ENV=py34-dj110
+    - env: TOX_ENV=py27-dj110-memcache
+    - env: TOX_ENV=py34-dj110-memcache
+    - env: TOX_ENV=py27-dj110-redis
+    - env: TOX_ENV=py34-dj110-redis
 
 deploy:
   provider: pypi
