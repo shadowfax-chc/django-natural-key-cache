@@ -31,6 +31,7 @@ class NaturalKeyCacheManager(models.Manager):
         self.natural_keys = natural_keys
         self.cache_backend = caches[backend]
         self.timeout = timeout
+        super(NaturalKeyCacheManager, self).__init__()
 
     def generate_key(self, **search_params):
         '''
@@ -79,6 +80,7 @@ class NaturalKeyCacheManager(models.Manager):
         setattr(model, name, ManagerDescriptor(self))
         models.signals.post_save.connect(self.post_save, sender=model)
         models.signals.post_delete.connect(self.post_delete, sender=model)
+        super(NaturalKeyCacheManager, self).contribute_to_class(model, name)
 
     def post_save(self,
                   instance,
