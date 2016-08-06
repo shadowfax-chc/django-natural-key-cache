@@ -17,6 +17,11 @@ after_success:
   - coveralls
   - codecov
 
+matrix:
+  allow_failures:
+    - env: TOX_ENV=py27-dj110
+    - env: TOX_ENV=py34-dj110
+
 deploy:
   provider: pypi
   user: tim.messier

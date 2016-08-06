@@ -14,7 +14,7 @@ from django.db.models.manager import ManagerDescriptor
 logger = logging.getLogger(__name__)
 
 
-class NaturalKeyCacheManager(object):
+class NaturalKeyCacheManager(models.Manager):
     '''
     Custom model manager that allows for lookups via natural keys.
     '''

@@ -6,7 +6,7 @@ tests.factories
 import factory
 from factory import fuzzy
 
-from tests.models import Author, Book, Shelf
+from .models import Author, Book, Shelf
 
 
 class AuthorFactory(factory.django.DjangoModelFactory):
