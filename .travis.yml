@@ -24,13 +24,6 @@ after_success:
   - coveralls
   - codecov
 
-matrix:
-  allow_failures:
-    - env: TOX_ENV=py27-dj110-memcache
-    - env: TOX_ENV=py34-dj110-memcache
-    - env: TOX_ENV=py27-dj110-redis
-    - env: TOX_ENV=py34-dj110-redis
-
 deploy:
   provider: pypi
   user: tim.messier
